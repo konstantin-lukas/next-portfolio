@@ -1,0 +1,10 @@
+$accent-color: #ff2977;
+$footer-height: 30px;
+
+@mixin transition($property) {
+  transition: $property .2s cubic-bezier(0,.68,.33,.99);
+}
+
+:export {
+  accentColor: $accent-color;
+}
