@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {josefinSans} from './fonts';
 import "./globals.scss";
 import {ReactNode} from "react";
+import Menu from "@/app/Menu";
 
 
 export const metadata: Metadata = {
@@ -29,7 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={josefinSans.className}>{children}</body>
+      <body className={josefinSans.className}>
+        <Menu/>
+        {children}
+      </body>
     </html>
   );
 }
