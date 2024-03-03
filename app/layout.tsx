@@ -32,7 +32,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={josefinSans.className}>
         <Menu/>
-        {children}
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
