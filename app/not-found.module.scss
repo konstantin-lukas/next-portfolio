@@ -1,0 +1,43 @@
+.body {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  svg {
+    position: absolute;
+  }
+
+  #error_message {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: 1;
+  }
+
+  #error_message  h1 {
+    font-size: 48px;
+    line-height: 1em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  #error_message span {
+    font-size: 24px;
+    margin-top: .3em;
+    text-align: center;
+    display: block;
+    line-height: 1em;
+  }
+
+  @media only screen and (max-width: 700px) {
+    #error_message  h1 {
+      font-size: 7vw;
+    }
+
+    #error_message span {
+      font-size: 3.5vw;
+    }
+  }
+}
+
