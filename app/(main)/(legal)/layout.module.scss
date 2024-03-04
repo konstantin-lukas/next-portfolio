@@ -1,0 +1,135 @@
+.wrapper {
+  width: 31.8%;
+  margin: auto;
+  padding-bottom: 75px;
+  max-width: 700px;
+  .inline_link {
+    position: relative;
+  }
+
+  .inline_link::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 0;
+    bottom: -.1em;
+    background: #ff2977;
+    height: 1px;
+    -webkit-transition: width 0.3s cubic-bezier(0,.5,.56,1.01);
+    -o-transition: width 0.3s cubic-bezier(0,.5,.56,1.01);
+    transition: width 0.3s cubic-bezier(0,.5,.56,1.01);
+  }
+
+  .inline_link:hover::after {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+  h1 {
+    font-size: 72px;
+    margin-top: 2em;
+  }
+
+  h2 {
+    display: inline-block;
+    font-size: 36px;
+    margin-top: .5em;
+    margin-bottom: .33em;
+    text-decoration: underline;
+    -webkit-text-decoration-color: #ff2977;
+    text-decoration-color: #ff2977;
+  }
+
+  h3 {
+    font-weight: 400;
+    margin-top: 1em;
+    margin-bottom: .2em;
+    font-size: 28px;
+  }
+
+  h4 {
+    font-weight: 400;
+    margin-top: 1em;
+    margin-bottom: .2em;
+    font-size: 21px;
+  }
+
+  p {
+    margin-top: 1em;
+    font-size: 21px;
+    text-align: justify;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+  }
+
+  a {
+    font-size: 21px;
+  }
+
+  @media only screen and (max-width: 1600px) {
+    .wrapper {
+      width: 50%;
+    }
+  }
+
+  @media only screen and (max-width: 950px) {
+    .wrapper {
+      width: 61.8%;
+    }
+  }
+
+  @media only screen and (max-width: 750px) {
+    .wrapper {
+      width: 75%;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .wrapper {
+      width: 80%;
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    h1 {
+      font-size: 48px;
+    }
+    h2 {
+      font-size: 28px;
+    }
+    h3 {
+      font-size: 21px;
+    }
+    h4 {
+      font-size: 18px;
+    }
+    p {
+      font-size: 18px;
+    }
+    a {
+      font-size: 18px;
+    }
+  }
+
+  @media only screen and (max-width: 420px) {
+    h1 {
+      font-size: 36px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    h3 {
+      font-size: 18px;
+    }
+    h4 {
+      font-size: 16px;
+    }
+    p {
+      font-size: 16px;
+    }
+    a {
+      font-size: 16px;
+    }
+  }
+}

@@ -129,7 +129,7 @@ export default function Page() {
             setTimeout(function () {
                 requestAnimationFrame(() => {
                     if (projectContRef.current) {
-                        checkScrollPos(projectContRef.current, scrollSpeed, 10 * value * direction);
+                        checkScrollPos(projectContRef.current, scrollSpeed, 20 * value * direction);
                     }
                 });
             }, i * 10);

@@ -66,3 +66,26 @@ ul {
   content: ".";
   color: #ff2977;
 }
+
+.inline_link {
+  position: relative;
+}
+
+.inline_link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 0;
+  bottom: -.1em;
+  background: #ff2977;
+  height: 1px;
+  -webkit-transition: width 0.3s cubic-bezier(0,.5,.56,1.01);
+  -o-transition: width 0.3s cubic-bezier(0,.5,.56,1.01);
+  transition: width 0.3s cubic-bezier(0,.5,.56,1.01);
+}
+
+.inline_link:hover::after {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
