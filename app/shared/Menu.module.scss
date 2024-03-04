@@ -105,31 +105,6 @@
   align-items: center;
   position: relative;
 }
-
-.github {
-  width: 40px;
-  height: 40px;
-  display: block;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  opacity: .2;
-  transform: translateX(-100px);
-  transition: opacity .2s cubic-bezier(0,.5,.56,1.01), transform .3s cubic-bezier(0,.5,.56,1.01);
-}
-
-.open .github {
-  transform: none;
-}
-
-.github:hover {
-  opacity: 1;
-}
-
-.github img {
-  width: 100%;
-}
-
 .main_nav .important_nav {
   position: relative;
   margin-left: 25%;
@@ -351,12 +326,6 @@ span.anchor {
   .menu_button {
     top: 15px;
     right: 15px;
-  }
-  .github {
-    width: 30px;
-    height: 30px;
-    top: 12px;
-    left: 12px;
   }
 }
 

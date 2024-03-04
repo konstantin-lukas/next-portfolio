@@ -2,7 +2,6 @@
 
 import styles from "./Menu.module.scss";
 import Link from "next/link";
-import Image from "next/image";
 import {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 
@@ -38,10 +37,11 @@ export default function Menu() {
                         sprachen
                     </Link>
                     <Link
-                        className={styles["contact"] + (pathname === "/contact" ? " " + styles["current"] : "")}
-                        href={"/kontakt"}
+                        className={styles["contact"]}
+                        href="https://github.com/konstantin-lukas"
+                        target="_blank"
                     >
-                        kontakt
+                        github
                     </Link>
                     <span className={styles["anchor"]}></span>
                 </div>
@@ -54,10 +54,6 @@ export default function Menu() {
                 className={styles["menu_button"]}
                 onClick={() => setOpen(!open)}
             >menü.</span>
-            <Link className={styles["github"]} href="https://github.com/konstantin-lukas" target="_blank">
-                <Image src="/images/github_icon.svg" alt="Mein GitHub Profil" width={40} height={40}
-                priority/>
-            </Link>
         </header>
     )
 }
