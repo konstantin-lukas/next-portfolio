@@ -25,37 +25,6 @@ function getHeight(el: HTMLDivElement) {
     return (elmHeight + elmMargin);
 }
 
-function checkScrollPos(ref: HTMLDivElement, scrollSpeed: number, delta: number) {
-    const elem = ref.querySelector('div');
-    if (elem) {
-        if (window.innerWidth > window.innerHeight) {
-            const maxScrollPos = getHeight(elem) * 6;
-            const scrollPos = ref.scrollTop + scrollSpeed * delta;
-            if (scrollPos < 0) {
-                ref.scrollTo(0, scrollPos + maxScrollPos);
-            } else {
-                if (scrollPos >= maxScrollPos) {
-                    ref.scrollTo(0, 0);
-                } else {
-                    ref.scrollTo(0, scrollPos);
-                }
-            }
-        } else {
-            const maxScrollPos = getHeight(elem) * 6;
-            const scrollPos = ref.scrollLeft + scrollSpeed * delta;
-            if (scrollPos < 0) {
-                ref.scrollTo(scrollPos + maxScrollPos, 0);
-            } else {
-                if (scrollPos >= maxScrollPos) {
-                    ref.scrollTo(0, 0);
-                } else {
-                    ref.scrollTo(scrollPos, 0);
-                }
-            }
-        }
-    }
-}
-
 export default function Page() {
     const projects = useMemo<ProjectBrief[]>(() => ([
         {
@@ -90,6 +59,37 @@ export default function Page() {
         h2: "Full-Stack Developer"
     })
 
+    function checkScrollPos(ref: HTMLDivElement, scrollSpeed: number, delta: number) {
+        const elem = ref.querySelector('div');
+        if (elem) {
+            if (window.innerWidth > window.innerHeight) {
+                const maxScrollPos = getHeight(elem) * projects.length;
+                const scrollPos = ref.scrollTop + scrollSpeed * delta;
+                if (scrollPos < 0) {
+                    ref.scrollTo(0, scrollPos + maxScrollPos);
+                } else {
+                    if (scrollPos >= maxScrollPos) {
+                        ref.scrollTo(0, 0);
+                    } else {
+                        ref.scrollTo(0, scrollPos);
+                    }
+                }
+            } else {
+                const maxScrollPos = getHeight(elem) * 6;
+                const scrollPos = ref.scrollLeft + scrollSpeed * delta;
+                if (scrollPos < 0) {
+                    ref.scrollTo(scrollPos + maxScrollPos, 0);
+                } else {
+                    if (scrollPos >= maxScrollPos) {
+                        ref.scrollTo(0, 0);
+                    } else {
+                        ref.scrollTo(scrollPos, 0);
+                    }
+                }
+            }
+        }
+    }
+
     const projectHTML = useMemo(() => projects.map((p, i) => {
         const snake = toSnakeCase(p.name);
         return (
@@ -115,6 +115,7 @@ export default function Page() {
                         width={300}
                         height={300}
                         priority
+                        draggable={false}
                     />
                 </Link>
             </div>

@@ -13,6 +13,10 @@
   margin-right: auto;
   font-size: 3vmax;
   z-index: 1;
+  * {
+    user-select: none;
+  }
+
   .layout_column {
     height: 100%;
     flex: 1 1 0;

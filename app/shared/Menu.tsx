@@ -3,12 +3,15 @@
 import styles from "./Menu.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 
 export default function Menu() {
 
     const pathname = usePathname();
+    useEffect(() => {
+        setOpen(false);
+    }, [pathname]);
     const [open, setOpen] = useState(false);
 
     return (
@@ -23,8 +26,8 @@ export default function Menu() {
                         home
                     </Link>
                     <Link
-                        className={styles["projekte"] + (pathname === "/projekte" ? " " + styles["current"] : "")}
-                        href="/projekte"
+                        className={styles["projects"] + (pathname === "/projekte" ? " " + styles["current"] : "")}
+                        href={"/projekte"}
                     >
                         projekte
                     </Link>

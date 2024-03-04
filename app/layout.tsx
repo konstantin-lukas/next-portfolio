@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import {josefinSans} from './fonts';
 import "./globals.scss";
 import {ReactNode} from "react";
-import Menu from "@/app/Menu";
+import Menu from "@/app/shared/Menu";
 
 
 export const metadata: Metadata = {
