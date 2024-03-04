@@ -31,12 +31,6 @@ export default function Menu() {
                         projekte
                     </Link>
                     <Link
-                        className={styles["sprachen"] + (pathname === "/sprachen" ? " " + styles["current"] : "")}
-                        href={"/sprachen"}
-                    >
-                        sprachen
-                    </Link>
-                    <Link
                         className={styles["contact"]}
                         href="https://github.com/konstantin-lukas"
                         target="_blank"

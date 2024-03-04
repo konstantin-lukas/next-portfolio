@@ -105,6 +105,7 @@
   align-items: center;
   position: relative;
 }
+
 .main_nav .important_nav {
   position: relative;
   margin-left: 25%;
@@ -232,18 +233,13 @@ span.anchor {
   visibility: visible;
 }
 
-.sprachen.current ~ .anchor::before {
+.projects.current ~ .anchor::before {
   top: -3em;
   visibility: visible;
 }
 
-.projects.current ~ .anchor::before {
-  top: -5em;
-  visibility: visible;
-}
-
 .home.current ~ .anchor::before {
-  top: -7em;
+  top: -5em;
   visibility: visible;
 }
 
@@ -251,16 +247,12 @@ span.anchor {
   top: -1em;
 }
 
-.sprachen:hover ~ .anchor::before {
+.projects:hover ~ .anchor::before {
   top: -3em;
 }
 
-.projects:hover ~ .anchor::before {
-  top: -5em;
-}
-
 .home:hover ~ .anchor::before {
-  top: -7em;
+  top: -5em;
 }
 
 .footer_nav {
