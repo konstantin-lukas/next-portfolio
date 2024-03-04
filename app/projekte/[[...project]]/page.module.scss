@@ -166,6 +166,7 @@ h1.pinkdot {
 }
 
 .project_lightbox_image h2 {
+  z-index: 1;
   font-size: inherit;
   position: absolute;
   bottom: calc(100% - 2.8em);
@@ -174,6 +175,27 @@ h1.pinkdot {
   transform: translateX(calc(100% - 1.25em));
   transition: opacity .2s cubic-bezier(0,.5,.56,1.01), bottom .2s cubic-bezier(0,.5,.56,1.01);
   pointer-events: none;
+}
+
+.button_hover {
+  position: relative;
+}
+
+.button_hover::before {
+  content: "";
+  height: 0;
+  width: 100%;
+  position: absolute;
+  background-color: #ff5794;
+  left: 0;
+  bottom: 0;
+  -webkit-transition: height .2s cubic-bezier(0,.5,.56,1.01);
+  -o-transition: height .2s cubic-bezier(0,.5,.56,1.01);
+  transition: height .2s cubic-bezier(0,.5,.56,1.01);
+}
+
+.button_hover:hover::before {
+  height: 100%;
 }
 
 .lightbox_content_wrapper {

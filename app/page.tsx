@@ -64,11 +64,10 @@ export default function Page() {
     }
 
     const projectHTML = useMemo(() => projects.map((p, i) => {
-        const snake = toSnakeCase(p.name);
         return (
             <div className={styles["project_prev"]} key={i}>
                 <Link
-                    href={"/projekte/" + snake}
+                    href={"/projekte/" + encodeURIComponent(p.name.toLowerCase())}
                     onMouseOver={() => {
                         setHeadings({
                             h1: p.name,
@@ -83,7 +82,7 @@ export default function Page() {
                     }}
                 >
                     <Image
-                        src={`/images/projects/${snake}.webp`}
+                        src={`/images/projects/${toSnakeCase(p.name)}.webp`}
                         alt={p.name}
                         width={300}
                         height={300}

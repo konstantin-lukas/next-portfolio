@@ -26,28 +26,28 @@ export default function Menu() {
                         home
                     </Link>
                     <Link
-                        className={styles["projects"] + (pathname === "/projekte" ? " " + styles["current"] : "")}
+                        className={styles["projects"] + (pathname.startsWith("/projekte") ? " " + styles["current"] : "")}
                         href={"/projekte"}
                     >
                         projekte
                     </Link>
                     <Link
                         className={styles["sprachen"] + (pathname === "/sprachen" ? " " + styles["current"] : "")}
-                        href="/sprachen"
+                        href={"/sprachen"}
                     >
                         sprachen
                     </Link>
                     <Link
                         className={styles["contact"] + (pathname === "/contact" ? " " + styles["current"] : "")}
-                        href="/kontakt"
+                        href={"/kontakt"}
                     >
                         kontakt
                     </Link>
                     <span className={styles["anchor"]}></span>
                 </div>
                 <div className={styles["footer_nav"]}>
-                    <Link className={styles["data"]} href="/datenschutz">datenschutz</Link>
-                    <Link className={styles["notice"]} href="/impressum">impressum</Link>
+                    <Link className={styles["data"]} href={"/datenschutz"}>datenschutz</Link>
+                    <Link className={styles["notice"]} href={"/impressum"}>impressum</Link>
                 </div>
             </nav>
             <span
