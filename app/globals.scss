@@ -56,3 +56,13 @@ ul {
   background-color: rgba(0, 0, 0, 0.99);
   color: #fff;
 }
+
+.pinkdot {
+  position: relative;
+}
+
+.pinkdot::after {
+  position: absolute;
+  content: ".";
+  color: #ff2977;
+}

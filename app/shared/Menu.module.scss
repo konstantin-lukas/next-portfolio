@@ -397,16 +397,6 @@ a.underline:hover {
   color: #fff;
 }
 
-.pinkdot {
-  position: relative;
-}
-
-.pinkdot::after {
-  position: absolute;
-  content: ".";
-  color: #ff2977;
-}
-
 @media only screen and (max-height: 450px) {
   .menu_button {
     top: 20px;

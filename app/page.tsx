@@ -2,7 +2,7 @@
 
 import styles from "./page.module.scss";
 import {useEffect, useMemo, useRef, useState} from "react";
-import {ProjectBrief, Context} from "@/app/utils/types";
+import {projects} from "@/app/utils/data";
 import {toSnakeCase} from "@/app/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,33 +26,6 @@ function getHeight(el: HTMLDivElement) {
 }
 
 export default function Page() {
-    const projects = useMemo<ProjectBrief[]>(() => ([
-        {
-            name: "Dakyo",
-            year: 2021,
-            context: "Hobbyprojekt" as Context
-        },{
-            name: "Nox",
-            year: 2020,
-            context: "Ausbildung" as Context
-        },{
-            name: "Currency Input",
-            year: 2021,
-            context: "Hobbyprojekt" as Context
-        },{
-            name: "Oslo",
-            year: 2020,
-            context: "Hobbyprojekt" as Context
-        },{
-            name: "Verdicare",
-            year: 2023,
-            context: "Übungsprojekt" as Context
-        },{
-            name: "Untitled Ghost Game",
-            year: 2023,
-            context: "Freizeit & Uni" as Context
-        }
-    ]), []);
 
     const [headings, setHeadings] = useState({
         h1: "Konstantin Lukas",
@@ -120,7 +93,7 @@ export default function Page() {
                 </Link>
             </div>
         )
-    }), [projects]);
+    }), []);
 
     const projectContRef = useRef<HTMLDivElement>(null);
     const [_, setLastUpdate] = useState<number>(Date.now());
@@ -145,7 +118,7 @@ export default function Page() {
         const interval = window.setInterval(scrollProjects, 1000 / fps);
         setAnimInterval(interval);
         return () => window.clearInterval(interval);
-    }, [projectContRef]);
+    }, [projectContRef]); // eslint-disable-line
     const [previousTouch, setPreviousTouch] = useState(0);
 
     const handleUserScroll = (direction: number) => {
