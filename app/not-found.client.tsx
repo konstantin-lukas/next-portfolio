@@ -15,15 +15,15 @@ let getRGB = function() {
 }
 export default function Page() {
     const [dvdState, setDvdState] = useState({
-        x: window.innerWidth / 2 - 270 / 2,
-        y: window.innerHeight / 2 - 121 / 2,
+        x: typeof window !== "undefined" ? window.innerWidth / 2 - 270 / 2 : 960,
+        y: typeof window !== "undefined" ? window.innerHeight / 2 - 121 / 2 : 540,
         dx: 1,
         dy: 1,
         w: 270,
         h: 121,
         color: getRGB()
     });
-    const animSpeed = 0.08;
+    const animSpeed = 0.2;
     const fps = 60;
     const [_, setLastUpdate] = useState<number>(Date.now());
     const dvd = useMemo(() => {
@@ -51,6 +51,7 @@ export default function Page() {
             </svg>
         );
     }, [dvdState]);
+
     useEffect(() => {
         const animateDVD = () => {
             requestAnimationFrame(() => {
@@ -63,25 +64,15 @@ export default function Page() {
                             x: prevState.x + prevState.dx * animSpeed * diff,
                             y: prevState.y + prevState.dy * animSpeed * diff
                         };
-                        const top = newState.y <= 0;
-                        const bottom = newState.y + newState.h >= window.innerHeight;
-                        const left = newState.x <= 0;
-                        const right = newState.x + newState.w >= window.innerWidth;
-                        if (bottom || top) {
+                        if (newState.y + newState.h >= window.innerHeight || newState.y <= 0) {
                             newState.dy = -newState.dy;
+                            newState.y = prevState.y;
                             newState.color = getRGB();
-                            if (top)
-                                newState.y = 0;
-                            else
-                                newState.y += newState.dy
                         }
-                        if (left || right) {
+                        if (newState.x <= 0 || newState.x + newState.w >= window.innerWidth) {
                             newState.dx = -newState.dx;
+                            newState.x = prevState.x;
                             newState.color = getRGB();
-                            if (left)
-                                newState.x = 0;
-                            else
-                                newState.x += newState.dx
                         }
                         return newState;
                     });

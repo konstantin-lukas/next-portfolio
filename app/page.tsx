@@ -98,7 +98,7 @@ export default function Page() {
     const [_, setLastUpdate] = useState<number>(Date.now());
     const [animInterval, setAnimInterval] = useState<number>(0);
     const [animTimeout, setAnimTimeout] = useState<number>(0);
-    const scrollSpeed = 0.05;
+    const scrollSpeed = 0.06;
     const fps = 40;
 
     const scrollProjects = () => {
