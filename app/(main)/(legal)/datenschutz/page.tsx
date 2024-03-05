@@ -1,3 +1,9 @@
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Datenschutz | Konstantin Lukas"
+};
+
 export default function Page() {
     return (
         <>

@@ -1,3 +1,9 @@
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Impressum | Konstantin Lukas"
+};
+
 export default function Page() {
     return (
         <>

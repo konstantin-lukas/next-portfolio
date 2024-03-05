@@ -67,7 +67,7 @@ export default function Page() {
         return (
             <div className={styles["project_prev"]} key={i}>
                 <Link
-                    href={"/projekte/" + encodeURIComponent(p.name.toLowerCase())}
+                    href={"/projekte/" + encodeURIComponent(p.name.toLowerCase().replaceAll(' ', '-'))}
                     onMouseOver={() => {
                         setHeadings({
                             h1: p.name,

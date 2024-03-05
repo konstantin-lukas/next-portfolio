@@ -17,7 +17,7 @@ export const metadata: Metadata = {
       "Mediengestaltung, Media Design, Diseño de Medios, Mediengestalter Digital & Print, " +
       "Digital, Print, Media, Artificial Intelligence, AI, KI, Photoshop, InDesign, Illustrator, " +
       "Adobe, Kameras, Cameras, Fotografie, Photography, Grafikdesign, Vektor, Pixel, Drucker, SEO, " +
-      "Vanilla, Cookies, Session, POST, GET, Zalando, Studios, Web Development, Front-End, Back-End, Portfolio",
+      "Vanilla, Cookies, Session, Zalando, Studios, Web Development, Front-End, Back-End, Portfolio",
   authors: [
     { name: "Konstantin Lukas", url: "konstantin-lukas.de" }
   ]
