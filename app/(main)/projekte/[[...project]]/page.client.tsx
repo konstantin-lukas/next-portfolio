@@ -5,7 +5,7 @@ import {useEffect, useMemo} from "react";
 import {projects} from "@/app/utils/data";
 import Image from "next/image";
 import {toSnakeCase} from "@/app/utils/utils";
-import {notFound, usePathname, useRouter} from "next/navigation";
+import {notFound, usePathname} from "next/navigation";
 import anime from "animejs";
 import Link from "next/link";
 
@@ -35,7 +35,7 @@ let backAnim = function (path: string, target: SVGPolygonElement) {
 
 
 export default function Page() {
-    const router = useRouter();
+
     const pathSegments = usePathname().split('/');
     if (pathSegments.length > 3)
         notFound();
@@ -75,7 +75,14 @@ export default function Page() {
             return (
                 <div className={styles["project_wide"]} key={i}>
                     <div className={styles["project_link"]} role="button" onClick={() => {
-                        router.push("/projekte/" + encodeURIComponent(p.name.toLowerCase().replaceAll(' ', '-')));
+                        window.history.pushState(
+                            null,
+                            '',
+                            "/projekte/" +
+                            encodeURIComponent(
+                                p.name.toLowerCase().replaceAll(' ', '-')
+                            )
+                        );
                     }}>
                         <Image
                             src={`/images/projects/${toSnakeCase(p.name)}.webp`}
@@ -90,7 +97,7 @@ export default function Page() {
                 </div>
             )
         })
-    }, [router]);
+    }, []);
 
     useEffect(() => {
         if (project !== "undefined") {
@@ -147,7 +154,11 @@ export default function Page() {
                                      );
                              }}
                              onClick={() => {
-                                 router.push("/projekte");
+                                 window.history.pushState(
+                                     null,
+                                     '',
+                                     "/projekte"
+                                 );
                              }}
                         >
                             <polygon className={styles["st0"]}
@@ -198,7 +209,7 @@ export default function Page() {
                 </div>
             )
         })
-    }, [router, project]);
+    },  [project]);
 
     return (
         <div className={styles["main"]}>

@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.scss";
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {projects} from "@/app/utils/data";
 import {toSnakeCase} from "@/app/utils/utils";
 import Image from "next/image";
@@ -32,36 +32,48 @@ export default function Page() {
         h2: "Full-Stack Developer"
     })
 
-    function checkScrollPos(ref: HTMLDivElement, scrollSpeed: number, delta: number) {
+    const setScrollPos = useState(0)[1];
+
+    const checkScrollPos = useCallback(function (ref: HTMLDivElement, scrollSpeed: number, delta: number) {
         const elem = ref.querySelector('div');
         if (elem) {
             if (window.innerWidth > window.innerHeight) {
-                const maxScrollPos = getHeight(elem) * projects.length;
-                const scrollPos = ref.scrollTop + scrollSpeed * delta;
-                if (scrollPos < 0) {
-                    ref.scrollTo(0, scrollPos + maxScrollPos);
-                } else {
-                    if (scrollPos >= maxScrollPos) {
-                        ref.scrollTo(0, 0);
+                setScrollPos(prev => {
+                    const maxScrollPos = getHeight(elem) * projects.length;
+                    const newScrollPos = prev + scrollSpeed * delta;
+                    if (newScrollPos < 0) {
+                        ref.scrollTo(0, newScrollPos + maxScrollPos);
+                        return newScrollPos + maxScrollPos;
                     } else {
-                        ref.scrollTo(0, scrollPos);
+                        if (newScrollPos >= maxScrollPos) {
+                            ref.scrollTo(0, 0);
+                            return 0;
+                        } else {
+                            ref.scrollTo(0, newScrollPos);
+                            return newScrollPos;
+                        }
                     }
-                }
+                });
             } else {
-                const maxScrollPos = getHeight(elem) * 6;
-                const scrollPos = ref.scrollLeft + scrollSpeed * delta;
-                if (scrollPos < 0) {
-                    ref.scrollTo(scrollPos + maxScrollPos, 0);
-                } else {
-                    if (scrollPos >= maxScrollPos) {
-                        ref.scrollTo(0, 0);
+                setScrollPos(prev => {
+                    const maxScrollPos = getHeight(elem) * projects.length;
+                    const newScrollPos = prev + scrollSpeed * delta;
+                    if (newScrollPos < 0) {
+                        ref.scrollTo(newScrollPos + maxScrollPos, 0);
+                        return newScrollPos + maxScrollPos;
                     } else {
-                        ref.scrollTo(scrollPos, 0);
+                        if (newScrollPos >= maxScrollPos) {
+                            ref.scrollTo(0, 0);
+                            return 0;
+                        } else {
+                            ref.scrollTo(newScrollPos, 0);
+                            return newScrollPos;
+                        }
                     }
-                }
+                });
             }
         }
-    }
+    }, [setScrollPos]);
 
     const projectHTML = useMemo(() => projects.map((p, i) => {
         return (
@@ -95,34 +107,33 @@ export default function Page() {
     }), []);
 
     const projectContRef = useRef<HTMLDivElement>(null);
-    const [_, setLastUpdate] = useState<number>(Date.now());
-    const [animInterval, setAnimInterval] = useState<number>(0);
+    const setLastUpdate = useState<number>(Date.now())[1];
     const [animTimeout, setAnimTimeout] = useState<number>(0);
+    const [disableAutoScroll, setDisableAutoScroll] = useState(false);
+    const disableAutoScrollRef = useRef(false);
     const scrollSpeed = 0.06;
-    const fps = 40;
 
-    const scrollProjects = () => {
-        requestAnimationFrame(() => {
-            setLastUpdate((prev: number) => {
-                const now = Date.now();
-                const delta = now - prev;
-                if (projectContRef.current) {
-                    checkScrollPos(projectContRef.current, scrollSpeed, delta);
-                }
-                return now;
-            });
-        })
-    };
+    const scrollProjects = useCallback(() => {
+        if (disableAutoScrollRef.current) return;
+        setLastUpdate((prev: number) => {
+            const now = Date.now();
+            const delta = now - prev;
+            if (projectContRef.current) {
+                checkScrollPos(projectContRef.current, scrollSpeed, delta);
+            }
+            return now;
+        });
+        requestAnimationFrame(scrollProjects);
+    }, [setLastUpdate, checkScrollPos]);
     useEffect(() => {
-        const interval = window.setInterval(scrollProjects, 1000 / fps);
-        setAnimInterval(interval);
-        return () => window.clearInterval(interval);
-    }, [projectContRef]); // eslint-disable-line
+        disableAutoScrollRef.current = disableAutoScroll;
+        scrollProjects();
+    }, [scrollProjects, disableAutoScroll]);
     const [previousTouch, setPreviousTouch] = useState(0);
 
     const handleUserScroll = (direction: number) => {
-        window.clearInterval(animInterval);
         window.clearTimeout(animTimeout);
+        setDisableAutoScroll(true);
         const peak = 20;
         for (let i = 0; i <= 20; i++) {
             const value = Math.pow(Math.abs(Math.abs(i - (peak / 2)) - peak / 2),2) / 10;
@@ -136,7 +147,7 @@ export default function Page() {
         }
         setAnimTimeout(window.setTimeout(() => {
             setLastUpdate(Date.now());
-            setAnimInterval(window.setInterval(scrollProjects, 1000 / fps));
+            setDisableAutoScroll(false);
         }, 1000));
     }
 

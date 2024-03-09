@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
                 10 * (((((projects.length - i) / projects.length) + (projects.length - 1)) / projects.length) - 0.2)
             ) / 10;
         return {
-            url: domain + "/" + encodeURIComponent(p.name.toLowerCase().replaceAll(' ', '-')),
+            url: domain + "/projekte/" + encodeURIComponent(p.name.toLowerCase().replaceAll(' ', '-')),
             lastModified: new Date(),
             priority
         }
