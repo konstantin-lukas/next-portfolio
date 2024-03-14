@@ -24,7 +24,6 @@ export default function Page() {
         color: getRGB()
     });
     const animSpeed = 0.2;
-    const fps = 60;
     const [_, setLastUpdate] = useState<number>(Date.now());
     const dvd = useMemo(() => {
         return (
@@ -54,34 +53,32 @@ export default function Page() {
 
     useEffect(() => {
         const animateDVD = () => {
-            requestAnimationFrame(() => {
-                setLastUpdate(prevUpdate => {
-                    const now = Date.now();
-                    const diff = now - prevUpdate;
-                    setDvdState(prevState => {
-                        const newState = {
-                            ...prevState,
-                            x: prevState.x + prevState.dx * animSpeed * diff,
-                            y: prevState.y + prevState.dy * animSpeed * diff
-                        };
-                        if (newState.y + newState.h >= window.innerHeight || newState.y <= 0) {
-                            newState.dy = -newState.dy;
-                            newState.y = prevState.y;
-                            newState.color = getRGB();
-                        }
-                        if (newState.x <= 0 || newState.x + newState.w >= window.innerWidth) {
-                            newState.dx = -newState.dx;
-                            newState.x = prevState.x;
-                            newState.color = getRGB();
-                        }
-                        return newState;
-                    });
-                    return now;
+            setLastUpdate(prevUpdate => {
+                const now = Date.now();
+                const diff = now - prevUpdate;
+                setDvdState(prevState => {
+                    const newState = {
+                        ...prevState,
+                        x: prevState.x + prevState.dx * animSpeed * diff,
+                        y: prevState.y + prevState.dy * animSpeed * diff
+                    };
+                    if (newState.y + newState.h >= window.innerHeight || newState.y <= 0) {
+                        newState.dy = -newState.dy;
+                        newState.y = prevState.y;
+                        newState.color = getRGB();
+                    }
+                    if (newState.x <= 0 || newState.x + newState.w >= window.innerWidth) {
+                        newState.dx = -newState.dx;
+                        newState.x = prevState.x;
+                        newState.color = getRGB();
+                    }
+                    return newState;
                 });
+                return now;
             });
+            requestAnimationFrame(() => animateDVD());
         }
-        const interval = window.setInterval(animateDVD, 1000 / fps);
-        return () => window.clearInterval(interval);
+        animateDVD();
     }, []);
 
     useEffect(() => {
